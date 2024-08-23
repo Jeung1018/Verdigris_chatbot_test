@@ -130,7 +130,7 @@ def sigv4_request(
         params=None,
         headers=None,
         service='execute-api',
-        region=os.environ['AWS_REGION'],
+        region=theRegion,
         credentials=Session().get_credentials().get_frozen_credentials()
     ):
     """Sends an HTTP request signed with SigV4"""
