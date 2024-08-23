@@ -18,9 +18,9 @@ from dotenv import load_dotenv
 
 # Ensure these environment variables are set in your .env file
 
-# agentId = os.getenv("AGENT_ID")
-# agentAliasId = os.getenv("AGENT_ALIAS_ID")
-# theRegion = os.getenv("AWS_REGION")
+agentId = os.getenv("AGENT_ID")
+agentAliasId = os.getenv("AGENT_ALIAS_ID")
+theRegion = os.getenv("AWS_REGION")
 
 aws_region = "us-west-2"
 
