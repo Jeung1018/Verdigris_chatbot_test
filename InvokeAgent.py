@@ -22,6 +22,7 @@ from dotenv import load_dotenv
 # agentAliasId = os.getenv("AGENT_ALIAS_ID")
 # theRegion = os.getenv("AWS_REGION")
 
+aws_region = "us-west-2"
 
 def extract_metadata(split_response):
     # Initialize an empty list to store dictionaries containing unique title, category, and URL
@@ -163,7 +164,7 @@ def sigv4_request(
     )
 
 def askQuestion(question, sessionId, endSession=False):
-    url = f'https://bedrock-agent-runtime.{theRegion}.amazonaws.com/agents/{agentId}/agentAliases/{agentAliasId}/sessions/{sessionId}/text'
+    url = f'https://bedrock-agent-runtime.{aws_region}.amazonaws.com/agents/{agentId}/agentAliases/{agentAliasId}/sessions/{sessionId}/text'
     myobj = {
         "inputText": question,
         "enableTrace": True,
