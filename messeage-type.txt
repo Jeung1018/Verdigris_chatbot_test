@@ -1,0 +1,13 @@
+modelInvocationInput
+modelinvocationOutput
+rationale
+
+
+04 – invocationInput - knowledgeBaseLookupInput
+05 - invocationInput - knowledgeBaseLookupOutput
+06 – modelInvocationInput – KB response generation
+07 – modelInvocationInput - Instructions for the Agent
+08 - modelInvocationOutput
+09 - observation
+10 – modelInvocationInput - postProcessingTrace
+11 – modelInvocationOutput - postProcessingTrace

@@ -1,0 +1,5 @@
+knowledge_base_prompts = [
+    {"Prompt": "what is adaptive technology?"},
+    {"Prompt": "what is the core value of Verdigris"},
+    {"Prompt": "Provide any important information I should know about Verdigris"},
+    {"Prompt": "Tell me about distinguised technologies of Verdigris"}
