@@ -21,7 +21,6 @@ from dotenv import load_dotenv
 # agentId = os.getenv("AGENT_ID")
 # agentAliasId = os.getenv("AGENT_ALIAS_ID")
 # theRegion = os.getenv("AWS_REGION")
-my_db.connect(**st.secrets.db_credentials)
 st.write("theRegion:", st.secrets["AWS_REGION"])
 
 def extract_metadata(split_response):
