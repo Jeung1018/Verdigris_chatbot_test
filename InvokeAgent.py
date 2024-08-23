@@ -21,6 +21,8 @@ from dotenv import load_dotenv
 # agentAliasId = os.getenv("AGENT_ALIAS_ID")
 # theRegion = os.getenv("AWS_REGION")
 
+my_db.connect(**st.secrets.db_credentials)
+
 def extract_metadata(split_response):
     # Initialize an empty list to store dictionaries containing unique title, category, and URL
     metadata_list = []
