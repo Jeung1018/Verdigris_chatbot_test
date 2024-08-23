@@ -6,6 +6,9 @@ from PIL import Image, ImageOps, ImageDraw
 
 my_db.connect(**st.secrets.db_credentials)
 
+st.write("theRegion", st.secrets["AWS_REGION"])
+
+
 # Streamlit page configuration
 st.set_page_config(page_title="Verdigris Chatbot", page_icon=":robot_face:", layout="wide")
 
