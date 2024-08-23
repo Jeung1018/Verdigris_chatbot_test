@@ -6,6 +6,7 @@ import base64
 import io
 import sys
 import re
+import streamlit as st
 from requests import request
 from boto3.session import Session
 from botocore.auth import SigV4Auth
@@ -20,7 +21,7 @@ from dotenv import load_dotenv
 # agentId = os.getenv("AGENT_ID")
 # agentAliasId = os.getenv("AGENT_ALIAS_ID")
 # theRegion = os.getenv("AWS_REGION")
-
+my_db.connect(**st.secrets.db_credentials)
 st.write("theRegion:", st.secrets["AWS_REGION"])
 
 def extract_metadata(split_response):
