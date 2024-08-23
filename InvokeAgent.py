@@ -133,7 +133,7 @@ def sigv4_request(
         params=None,
         headers=None,
         service='execute-api',
-        region=theRegion,
+        region='theRegion',
         credentials=Session().get_credentials().get_frozen_credentials()
     ):
     """Sends an HTTP request signed with SigV4"""
