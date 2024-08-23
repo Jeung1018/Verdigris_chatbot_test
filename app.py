@@ -4,10 +4,10 @@ import json
 import pandas as pd
 from PIL import Image, ImageOps, ImageDraw
 
-st.write("AWS_Region", st.secrets["aws_region"])
-
 # Streamlit page configuration
 st.set_page_config(page_title="Verdigris Chatbot", page_icon=":robot_face:", layout="wide")
+
+st.write("AWS_Region", st.secrets["aws_region"])
 
 # Function to crop image into a circle
 def crop_to_circle(image):
