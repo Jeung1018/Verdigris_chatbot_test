@@ -20,9 +20,7 @@ from dotenv import load_dotenv
 
 agentId = os.getenv("AGENT_ID")
 agentAliasId = os.getenv("AGENT_ALIAS_ID")
-theRegion = os.getenv("AWS_REGION")
-
-aws_region = "us-west-2"
+aws_region = os.getenv("AWS_REGION")
 
 def extract_metadata(split_response):
     # Initialize an empty list to store dictionaries containing unique title, category, and URL
@@ -179,7 +177,7 @@ def askQuestion(question, sessionId, endSession=False):
             'content-type': 'application/json',
             'accept': 'application/json',
         },
-        region=theRegion,
+        region=aws_region,
         body=json.dumps(myobj)
     )
 
