@@ -4,7 +4,7 @@ import json
 import pandas as pd
 from PIL import Image, ImageOps, ImageDraw
 
-st.write("aws_region:", st.secrets["AWS_REGION"])
+st.write("AWS_Region", st.secrets["aws_region"])
 
 # Streamlit page configuration
 st.set_page_config(page_title="Verdigris Chatbot", page_icon=":robot_face:", layout="wide")
