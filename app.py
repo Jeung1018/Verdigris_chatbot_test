@@ -1,11 +1,15 @@
 import InvokeAgent as agenthelper
 import streamlit as st
+import uuid
 import json
 import pandas as pd
 from PIL import Image, ImageOps, ImageDraw
 
 # Streamlit page configuration
 st.set_page_config(page_title="Verdigris Chatbot", page_icon=":robot_face:", layout="wide")
+
+if 'session_id' not in st.session_state:
+    st.session_state['session_id'] = str(uuid.uuid4())
 
 # Function to crop image into a circle
 def crop_to_circle(image):
@@ -87,7 +91,7 @@ def calculate_text_area_height(text, min_height=100, max_height=400):
 # Handling user input and responses
 if submit_button and prompt:
     event = {
-        "sessionId": "MYSESSION115",
+        "sessionId": st.session_state['session_id'],
         "question": prompt
     }
     with st.spinner('I am generating the answer...'):
