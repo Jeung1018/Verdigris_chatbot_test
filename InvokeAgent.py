@@ -22,6 +22,7 @@ agentId = os.getenv("AGENT_ID")
 agentAliasId = os.getenv("AGENT_ALIAS_ID")
 aws_region = os.getenv("AWS_REGION")
 
+print(f"AWS agentID: {agentId}")
 print(f"AWS Region: {aws_region}")
 
 def extract_metadata(split_response):
