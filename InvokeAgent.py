@@ -22,9 +22,6 @@ agentId = os.getenv("AGENT_ID")
 agentAliasId = os.getenv("AGENT_ALIAS_ID")
 aws_region = os.getenv("AWS_REGION")
 
-print(f"AWS agentID: {agentId}")
-print(f"AWS Region: {aws_region}")
-
 def extract_metadata(split_response):
     # Initialize an empty list to store dictionaries containing unique title, category, and URL
     metadata_list = []
@@ -149,12 +146,6 @@ def sigv4_request(
         params=params,
         headers=headers
     )
-
-    print(f"Service: {service}")
-    print(f"Region: {region}")
-    print(f"Credentials Access Key: {credentials.access_key}")
-    print(f"Credentials Secret Key: {credentials.secret_key}")
-    print(f"Credentials Token: {credentials.token}")
 
     SigV4Auth(credentials, service, region).add_auth(req)
 
