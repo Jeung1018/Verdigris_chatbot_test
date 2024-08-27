@@ -22,6 +22,8 @@ agentId = os.getenv("AGENT_ID")
 agentAliasId = os.getenv("AGENT_ALIAS_ID")
 aws_region = os.getenv("AWS_REGION")
 
+print(f"AWS Region: {aws_region}")
+
 def extract_metadata(split_response):
     # Initialize an empty list to store dictionaries containing unique title, category, and URL
     metadata_list = []
