@@ -147,6 +147,12 @@ def sigv4_request(
         headers=headers
     )
 
+    print(f"Service: {service}")
+    print(f"Region: {region}")
+    print(f"Credentials Access Key: {credentials.access_key}")
+    print(f"Credentials Secret Key: {credentials.secret_key}")
+    print(f"Credentials Token: {credentials.token}")
+
     SigV4Auth(credentials, service, region).add_auth(req)
 
     # Print the headers after signing to debug the request signing process
