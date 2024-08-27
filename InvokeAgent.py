@@ -131,9 +131,9 @@ def sigv4_request(
         params=None,
         headers=None,
         service='execute-api',
-        region=aws_region,
-        credentials=Session().get_credentials().get_frozen_credentials()
-    ):
+        credentials=Session().get_credentials().get_frozen_credentials(),
+        region=aws_region
+):
     """Sends an HTTP request signed with SigV4"""
     headers = headers or {}
 
