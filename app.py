@@ -20,15 +20,22 @@ def crop_to_circle(image):
     result.putalpha(mask)
     return result
 
+# Callback function to update the input box
+def update_prompt():
+    st.session_state["prompt"] = st.session_state["selectbox_prompt"]
+def clear_text():
+    st.session_state["prompt"] = ""
+    st.session_state["selectbox_prompt"] = ""
+def clear_selectbox():
+    st.session_state["selectbox_prompt"] = ""
+
 # Title with logo
 col1, col2 = st.columns([1, 5])
 with col1:
-    st.image("verdigris_logo.png", width=100)
+    st.image("verdigris_logo.png", width=150)
 with col2:
     st.title("Verdigris Chatbot")
-    st.write("")  # Add a blank line
-    st.write("")  # Add a blank line
-    st.write("")  # Add a blank line
+    st.write("powered by Claude 3.5 Sonnet")
 
 # Sidebar for user trace data
 st.sidebar.title("Trace Data")
@@ -38,49 +45,40 @@ if 'history' not in st.session_state:
     st.session_state['history'] = []
 if 'prompt' not in st.session_state:
     st.session_state['prompt'] = ""
-if 'reset_selectbox' not in st.session_state:
-    st.session_state['reset_selectbox'] = False
 
-knowledge_base_prompts = [
-    "",
-    "Does your device support 3-phase panels?",
-    "Tell me about distinguished technologies of Verdigris",
-    "What is the advantage of using Verdigris?",
-    "Provide any important information I should know about Verdigris",
-    "What is adaptive automation?",
-    "Does Verdigris work in my country?",
-    "Can I change use categories in the admin console?",
-]
+# example prompts
+with open("example_prompts.json", "r") as file:
+    example_prompts = json.load(file)
 
-# Callback function to reset the selectbox and clear the input text area after processing
-def reset_inputs():
-    st.session_state['reset_selectbox'] = True
-    st.session_state['selectbox_prompt'] = ""  # Reset the selectbox to the first (empty) option
-    st.session_state['prompt'] = ""  # Clear the input text area
-
-# Add a select box for knowledge base prompts
+# Add a select box for knowledge base prompts with an on_change callback
 selected_prompt = st.selectbox(
     "Frequently asked questions",
-    knowledge_base_prompts,
+    example_prompts,
     key="selectbox_prompt",
-    index=0 if st.session_state['reset_selectbox'] else knowledge_base_prompts.index(st.session_state['prompt']),
-    placeholder="Choose an option"
+    on_change=update_prompt  # Callback to update the input box
 )
 
-# When a prompt is selected, populate it into the text input box
-if selected_prompt:
-    st.session_state['prompt'] = selected_prompt
+# Display a button to clear the input using a callback
+clear_button = st.button("Clear Input", on_click=clear_text)
+
+# Add vertical space using margin-top with st.markdown
+st.markdown("<div style='margin-top: 40px'></div>", unsafe_allow_html=True)
 
 # Display a text box for input
 st.write("## Type your Question")
 prompt = st.text_input("", max_chars=2000, value=st.session_state['prompt'], key="input_prompt")
 prompt = prompt.strip()
 
-# Display a primary button for submission
-submit_button = st.button("Submit", type="primary")
-
-# Display a button to end the session
-end_session_button = st.button("End Session")
+# Add a form to handle user input
+with st.form(key="qa_form", clear_on_submit=True):
+    # Display a text box for input with a hidden label
+    prompt = st.text_input("Type your question below or select the question from above",
+                           max_chars=2000,
+                           value=st.session_state['prompt'],
+                           key="input_prompt",
+                           )
+    # Display a primary button for submission
+    submit_button = st.form_submit_button("Get Answer from AI")
 
 # Function to calculate dynamic height for responses
 def calculate_text_area_height(text, min_height=100, max_height=400):
@@ -94,7 +92,7 @@ if submit_button and prompt:
         "sessionId": st.session_state['session_id'],
         "question": prompt
     }
-    with st.spinner('I am generating the answer...'):
+    with st.spinner('Thinking...'):
         captured_string, llm_response, metadata_list = agenthelper.askQuestion(event['question'], event['sessionId'])
 
     if llm_response:
