@@ -43,18 +43,11 @@ if 'trace_output' not in st.session_state:
 with open("example_prompts.json", "r") as file:
     example_prompts = json.load(file)
 
-# Add a blank option to the list of prompts
-example_prompts.insert(0, "")
-
-# Add vertical space using margin-top with st.markdown
-st.markdown("<div style='margin-top: 20px'></div>", unsafe_allow_html=True)
-
-# Add a select box for knowledge base prompts with a default blank option
-selected_prompt = st.selectbox(
-    "Frequently asked questions",
-    example_prompts,
-    key="select_box_prompt"
-)
+# Display foldable list of example questions
+with st.expander("Frequently Asked Questions (Click to Expand)"):
+    st.write("Here are some example questions you can copy and paste into the input box below:")
+    for prompt in example_prompts:
+        st.markdown(f"- `{prompt}`")
 
 # Add vertical space using margin-top with st.markdown
 st.markdown("<div style='margin-top: 20px'></div>", unsafe_allow_html=True)
@@ -63,9 +56,9 @@ st.markdown("<div style='margin-top: 20px'></div>", unsafe_allow_html=True)
 st.write("## Type Your Question")
 with st.form(key="qa_form", clear_on_submit=True):
     prompt = st.text_input(
-        "Type your question below or select a prompt from above",
+        "Type your question below or copy and paste from the examples above",
         max_chars=2000,
-        value=st.session_state['prompt'] if st.session_state['prompt'] else selected_prompt,
+        value=st.session_state['prompt'],
         key="input_prompt"
     )
     submit_button = st.form_submit_button("Get Answer from AI")
@@ -101,9 +94,8 @@ if submit_button and prompt:
         st.session_state['history'].append({"question": prompt, "answer": llm_response})
         st.session_state['trace_output'] = captured_string
 
-    # Clear the prompt and reset the select box to the blank option
+    # Clear the prompt after submission
     st.session_state['prompt'] = ""
-    st.session_state['select_box_prompt'] = example_prompts[0]
 
 # Display the trace data in the sidebar
 if st.session_state['trace_output']:
