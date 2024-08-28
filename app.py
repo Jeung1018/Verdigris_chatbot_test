@@ -94,8 +94,6 @@ if submit_button and prompt:
         st.session_state['history'].append({"question": prompt, "answer": llm_response})
         st.session_state['trace_output'] = captured_string
 
-    # Clear the prompt after submission
-    st.session_state['prompt'] = ""
 
 # Display the trace data in the sidebar
 if st.session_state['trace_output']:
