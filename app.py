@@ -73,9 +73,11 @@ def stream_response(llm_response, metadata_list):
     full_response = []
 
     # Container for the Answer Section
-    with st.container():
-        st.write("### Answer")
-        full_response.append("### Answer\n\n")
+    answer_container = st.container()
+    with answer_container:
+        # Display the robot image instead of the "Answer" text
+        st.image("verdigrisChar.jpg", width=50)
+        full_response.append("### Answer\n\n")  # Keep this for storing full response, although it's not displayed
 
         # Stream the main response content
         for char in llm_response:
@@ -84,7 +86,8 @@ def stream_response(llm_response, metadata_list):
             time.sleep(0.01)  # Adjust the speed of streaming
 
     # Container for the References Section
-    with st.container():
+    references_container = st.container()
+    with references_container:
         # Outline: Separation before references
         yield "\n\n---\n\n"  # Add a horizontal line to separate the sections
         full_response.append("\n\n---\n\n")
