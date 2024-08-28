@@ -72,8 +72,8 @@ def stream_response(llm_response, metadata_list):
     # Initialize an empty list to collect the streamed content
     full_response = []
 
-    # Outline: Main Content Section
-    yield "### Main Content\n\n"  # Adding a header for the main content
+    # Outline: Answer Section
+    yield "### Answer\n\n"  # Adding a header for the main content
     full_response.append("### Main Content\n\n")
 
     # Stream the main response content
