@@ -100,12 +100,14 @@ if submit_button and prompt:
         st.session_state['history'].append({"question": prompt, "answer": llm_response})
         st.sidebar.text_area("Trace Output", value=captured_string, height=300)
 
+        # Clear the prompt from session state after submission
+        st.session_state["prompt"] = ""
+        st.rerun()
+
     else:
         st.session_state['history'].append({"question": prompt, "answer": "No response received."})
 
-    # Clear the prompt from session state after submission
-    st.session_state["prompt"] = ""
-    st.rerun()
+
 
 # Display conversation history
 st.write("## Conversation History")
