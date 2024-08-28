@@ -36,6 +36,8 @@ if 'history' not in st.session_state:
     st.session_state['history'] = []
 if 'prompt' not in st.session_state:
     st.session_state['prompt'] = ""
+if 'trace_output' not in st.session_state:
+    st.session_state['trace_output'] = ""
 
 # example prompts
 with open("example_prompts.json", "r") as file:
@@ -98,16 +100,18 @@ if submit_button and prompt:
         llm_response += urls_text
 
         st.session_state['history'].append({"question": prompt, "answer": llm_response})
-        st.sidebar.text_area("Trace Output", value=captured_string, height=300)
+        st.session_state['trace_output'] = captured_string  # Store trace output in session state
 
-        # Clear the prompt from session state after submission
-        st.session_state["prompt"] = ""
-        st.rerun()
+        # Clear the prompt after submission
+        st.session_state['prompt'] = ""
 
     else:
         st.session_state['history'].append({"question": prompt, "answer": "No response received."})
+        st.session_state['trace_output'] = "No response received."
 
-
+# Display the trace data in the sidebar
+if st.session_state['trace_output']:
+    st.sidebar.text_area("Trace Output", value=st.session_state['trace_output'], height=300)
 
 # Display conversation history
 st.write("## Conversation History")
