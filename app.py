@@ -39,14 +39,17 @@ if 'prompt' not in st.session_state:
 if 'trace_output' not in st.session_state:
     st.session_state['trace_output'] = ""
 
-# example prompts
+# Load example prompts
 with open("example_prompts.json", "r") as file:
     example_prompts = json.load(file)
+
+# Add a blank option to the list of prompts
+example_prompts.insert(0, "")
 
 # Add vertical space using margin-top with st.markdown
 st.markdown("<div style='margin-top: 20px'></div>", unsafe_allow_html=True)
 
-# Add a select box for knowledge base prompts with an on_change callback
+# Add a select box for knowledge base prompts with a default blank option
 selected_prompt = st.selectbox(
     "Frequently asked questions",
     example_prompts,
@@ -98,8 +101,9 @@ if submit_button and prompt:
         st.session_state['history'].append({"question": prompt, "answer": llm_response})
         st.session_state['trace_output'] = captured_string
 
-    # Clear the prompt after submission
+    # Clear the prompt and reset the select box to the blank option
     st.session_state['prompt'] = ""
+    st.session_state['select_box_prompt'] = example_prompts[0]
 
 # Display the trace data in the sidebar
 if st.session_state['trace_output']:
