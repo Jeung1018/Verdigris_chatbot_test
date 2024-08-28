@@ -20,10 +20,6 @@ def crop_to_circle(image):
     result.putalpha(mask)
     return result
 
-# Callback function to update the input box
-def update_prompt():
-    st.session_state["prompt"] = st.session_state["select_box_prompt"]
-
 # Title with logo
 col1, col2 = st.columns([1, 5])
 with col1:
@@ -48,13 +44,16 @@ with open("example_prompts.json", "r") as file:
 # Add vertical space using margin-top with st.markdown
 st.markdown("<div style='margin-top: 20px'></div>", unsafe_allow_html=True)
 
-# Add a select box for knowledge base prompts with an on_change callback
+# Add a select box for knowledge base prompts without on_change callback
 selected_prompt = st.selectbox(
     "Frequently asked questions",
     example_prompts,
-    key="select_box_prompt",
-    on_change=update_prompt  # Callback to update the input box
+    key="select_box_prompt"
 )
+
+# Add a button to update the input box with the selected value
+if st.button("Use Selected Prompt"):
+    st.session_state["prompt"] = selected_prompt
 
 # Add vertical space using margin-top with st.markdown
 st.markdown("<div style='margin-top: 20px'></div>", unsafe_allow_html=True)
@@ -102,7 +101,6 @@ if submit_button and prompt:
         st.sidebar.text_area("Trace Output", value=captured_string, height=300)
     else:
         st.session_state['history'].append({"question": prompt, "answer": "No response received."})
-
 
 # Display conversation history
 st.write("## Conversation History")
