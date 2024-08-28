@@ -46,30 +46,24 @@ with open("example_prompts.json", "r") as file:
 # Add vertical space using margin-top with st.markdown
 st.markdown("<div style='margin-top: 20px'></div>", unsafe_allow_html=True)
 
-# Add a select box for knowledge base prompts
-selected_prompt = st.selectbox(
-    "Frequently asked questions",
-    example_prompts,
-    key="select_box_prompt"
-)
+# Form to submit the selected prompt
+with st.form(key="selected_prompt_form", clear_on_submit=True):
+    selected_prompt = st.selectbox(
+        "Frequently asked questions",
+        example_prompts,
+        key="select_box_prompt"
+    )
+    submit_selected_button = st.form_submit_button("Submit Selected Prompt")
 
-# Add a button to submit the selected prompt
-submit_selected_button = st.button("Submit Selected Prompt")
-
-# Add vertical space using margin-top with st.markdown
-st.markdown("<div style='margin-top: 20px'></div>", unsafe_allow_html=True)
-
-# Display a text box for input
-st.write("## Type your Question")
-typed_prompt = st.text_input(
-    "Type your question below or select the question from above",
-    max_chars=2000,
-    value=st.session_state['prompt'],
-    key="input_prompt"
-)
-
-# Add a button to submit the typed question
-submit_typed_button = st.button("Submit Typed Question")
+# Form to submit the typed question
+with st.form(key="typed_prompt_form", clear_on_submit=True):
+    typed_prompt = st.text_input(
+        "Type your question below or select the question from above",
+        max_chars=2000,
+        value=st.session_state['prompt'],
+        key="input_prompt"
+    )
+    submit_typed_button = st.form_submit_button("Submit Typed Question")
 
 # Function to calculate dynamic height for responses
 def calculate_text_area_height(text, min_height=100, max_height=400):
