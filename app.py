@@ -85,7 +85,6 @@ def stream_response(llm_response, metadata_list):
     # Outline: Separation before references
     yield "\n\n---\n\n"  # Add a horizontal line to separate the sections
     full_response.append("\n\n---\n\n")
-    st.write("### References")
 
     # References Section
     if isinstance(metadata_list, list) and metadata_list:
