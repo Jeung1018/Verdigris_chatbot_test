@@ -42,14 +42,13 @@ def extract_metadata(split_response):
 
     # Iterate over each metadata block in the combined response
     for metadata_block in re.findall(metadata_pattern, combined_response):
-        # Find the title, category, and URL within the current metadata block
+        # Find the title and URL within the current metadata block
         title_match = re.search(title_pattern, metadata_block)
-        category_match = re.search(category_pattern, metadata_block)
         url_match = re.search(url_pattern, metadata_block)
 
-        # If all fields are found, store them in the list as a dictionary
-        if title_match and category_match and url_match:
-            entry = (title_match.group(1), category_match.group(1), url_match.group(1))
+        # If both fields are found, store them in the list as a dictionary
+        if title_match and url_match:
+            entry = (title_match.group(1), url_match.group(1))
             if entry not in unique_entries:
                 unique_entries.add(entry)
                 metadata_list.append({
