@@ -105,6 +105,7 @@ if submit_button and prompt:
 
     # Clear the prompt from session state after submission
     st.session_state["prompt"] = ""
+    st.rerun()
 
 # Display conversation history
 st.write("## Conversation History")
