@@ -66,8 +66,6 @@ st.markdown("<div style='margin-top: 40px'></div>", unsafe_allow_html=True)
 
 # Display a text box for input
 st.write("## Type your Question")
-prompt = st.text_input("", max_chars=2000, value=st.session_state['prompt'], key="input_prompt")
-prompt = prompt.strip()
 
 # Add a form to handle user input
 with st.form(key="qa_form", clear_on_submit=True):
