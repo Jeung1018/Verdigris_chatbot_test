@@ -23,11 +23,6 @@ def crop_to_circle(image):
 # Callback function to update the input box
 def update_prompt():
     st.session_state["prompt"] = st.session_state["select_box_prompt"]
-def clear_text():
-    st.session_state["prompt"] = ""
-    st.session_state["select_box_prompt"] = ""
-def clear_selectbox():
-    st.session_state["select_box_prompt"] = ""
 
 # Title with logo
 col1, col2 = st.columns([1, 5])
@@ -57,9 +52,6 @@ selected_prompt = st.selectbox(
     key="select_box_prompt",
     on_change=update_prompt  # Callback to update the input box
 )
-
-# Display a button to clear the input using a callback
-clear_button = st.button("Clear Input", on_click=clear_text)
 
 # Add vertical space using margin-top with st.markdown
 st.markdown("<div style='margin-top: 40px'></div>", unsafe_allow_html=True)

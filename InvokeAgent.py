@@ -54,8 +54,7 @@ def extract_metadata(split_response):
                 unique_entries.add(entry)
                 metadata_list.append({
                     "title": entry[0],
-                    "category": entry[1],
-                    "url": entry[2]
+                    "url": entry[1]
                 })
 
     # Output the metadata list for debugging
