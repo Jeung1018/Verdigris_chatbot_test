@@ -34,8 +34,6 @@ st.sidebar.title("Trace Data")
 # Session State Management
 if 'history' not in st.session_state:
     st.session_state['history'] = []
-if 'prompt' not in st.session_state:
-    st.session_state['prompt'] = ""
 if 'trace_output' not in st.session_state:
     st.session_state['trace_output'] = ""
 
@@ -58,7 +56,6 @@ with st.form(key="qa_form", clear_on_submit=True):
     prompt = st.text_input(
         "Type your question below or copy and paste from the examples above",
         max_chars=2000,
-        value=st.session_state['prompt'],
         key="input_prompt"
     )
     submit_button = st.form_submit_button("Get Answer from AI")
@@ -71,9 +68,6 @@ def calculate_text_area_height(text, min_height=100, max_height=400):
 
 # Handle form submission
 if submit_button and prompt:
-    # Store the prompt and reset the session state for the input prompt
-    st.session_state['prompt'] = prompt
-
     event = {
         "sessionId": st.session_state['session_id'],
         "question": prompt
@@ -93,7 +87,6 @@ if submit_button and prompt:
 
         st.session_state['history'].append({"question": prompt, "answer": llm_response})
         st.session_state['trace_output'] = captured_string
-
 
 # Display the trace data in the sidebar
 if st.session_state['trace_output']:
