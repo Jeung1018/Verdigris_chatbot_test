@@ -74,11 +74,14 @@ def calculate_text_area_height(text, min_height=100, max_height=400):
 
 # Handle form submission
 if submit_button and prompt:
+    # Store the prompt and reset the session state for the input prompt
     st.session_state['prompt'] = prompt
+
     event = {
         "sessionId": st.session_state['session_id'],
         "question": prompt
     }
+
     with st.spinner('Thinking...'):
         captured_string, llm_response, metadata_list = agenthelper.askQuestion(event['question'], event['sessionId'])
 
@@ -93,6 +96,10 @@ if submit_button and prompt:
 
         st.session_state['history'].append({"question": prompt, "answer": llm_response})
         st.session_state['trace_output'] = captured_string
+
+    # Clear the prompt after submission
+    st.session_state['prompt'] = ""
+    st.experimental_rerun()  # Rerun the app to clear the input box properly
 
 # Display the trace data in the sidebar
 if st.session_state['trace_output']:
