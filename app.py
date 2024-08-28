@@ -22,12 +22,12 @@ def crop_to_circle(image):
 
 # Callback function to update the input box
 def update_prompt():
-    st.session_state["prompt"] = st.session_state["selectbox_prompt"]
+    st.session_state["prompt"] = st.session_state["select_box_prompt"]
 def clear_text():
     st.session_state["prompt"] = ""
-    st.session_state["selectbox_prompt"] = ""
+    st.session_state["select_box_prompt"] = ""
 def clear_selectbox():
-    st.session_state["selectbox_prompt"] = ""
+    st.session_state["select_box_prompt"] = ""
 
 # Title with logo
 col1, col2 = st.columns([1, 5])
@@ -54,7 +54,7 @@ with open("example_prompts.json", "r") as file:
 selected_prompt = st.selectbox(
     "Frequently asked questions",
     example_prompts,
-    key="selectbox_prompt",
+    key="select_box_prompt",
     on_change=update_prompt  # Callback to update the input box
 )
 
