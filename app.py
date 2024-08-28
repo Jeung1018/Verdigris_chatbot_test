@@ -36,6 +36,8 @@ if 'history' not in st.session_state:
     st.session_state['history'] = []
 if 'prompt' not in st.session_state:
     st.session_state['prompt'] = ""
+if 'trace_output' not in st.session_state:
+    st.session_state['trace_output'] = ""
 
 # example prompts
 with open("example_prompts.json", "r") as file:
@@ -58,18 +60,20 @@ if st.button("Use Selected Prompt"):
 # Add vertical space using margin-top with st.markdown
 st.markdown("<div style='margin-top: 20px'></div>", unsafe_allow_html=True)
 
-# Display a text box for input
-st.write("## Type your Question")
+# Function to handle text input changes
+def handle_input_change():
+    # Update the session state with the current input value
+    st.session_state["prompt"] = st.session_state["input_prompt"]
 
-# Add a form to handle user input
+# Display a text box for input with an on_change callback
+st.write("## Type your Question")
 with st.form(key="qa_form", clear_on_submit=True):
-    # Display a text box for input with a hidden label
     prompt = st.text_input("Type your question below or select the question from above",
                            max_chars=2000,
                            value=st.session_state['prompt'],
                            key="input_prompt",
+                           on_change=handle_input_change  # Handle input changes
                            )
-    # Display a primary button for submission
     submit_button = st.form_submit_button("Get Answer from AI")
 
 # Function to calculate dynamic height for responses
@@ -98,14 +102,18 @@ if submit_button and prompt:
         llm_response += urls_text
 
         st.session_state['history'].append({"question": prompt, "answer": llm_response})
-        st.sidebar.text_area("Trace Output", value=captured_string, height=300)
+        st.session_state['trace_output'] = captured_string  # Store trace output in session state
 
-        # Clear the prompt from session state after submission
-        st.session_state["prompt"] = ""
-        st.rerun()
+        # Clear the prompt after submission
+        st.session_state['prompt'] = ""
 
     else:
         st.session_state['history'].append({"question": prompt, "answer": "No response received."})
+        st.session_state['trace_output'] = "No response received."
+
+# Display the trace data in the sidebar
+if st.session_state['trace_output']:
+    st.sidebar.text_area("Trace Output", value=st.session_state['trace_output'], height=300)
 
 # Display conversation history
 st.write("## Conversation History")
