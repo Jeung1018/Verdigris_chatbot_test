@@ -46,11 +46,12 @@ with open("example_prompts.json", "r") as file:
 # Add vertical space using margin-top with st.markdown
 st.markdown("<div style='margin-top: 20px'></div>", unsafe_allow_html=True)
 
-# Display clickable example prompts
-st.write("## Frequently Asked Questions")
-for prompt in example_prompts:
-    if st.button(prompt):
-        st.session_state['prompt'] = prompt
+# Add a select box for knowledge base prompts with an on_change callback
+selected_prompt = st.selectbox(
+    "Frequently asked questions",
+    example_prompts,
+    key="select_box_prompt"
+)
 
 # Add vertical space using margin-top with st.markdown
 st.markdown("<div style='margin-top: 20px'></div>", unsafe_allow_html=True)
@@ -61,7 +62,7 @@ with st.form(key="qa_form", clear_on_submit=True):
     prompt = st.text_input(
         "Type your question below or select a prompt from above",
         max_chars=2000,
-        value=st.session_state['prompt'],
+        value=st.session_state['prompt'] if st.session_state['prompt'] else selected_prompt,
         key="input_prompt"
     )
     submit_button = st.form_submit_button("Get Answer from AI")
@@ -99,7 +100,6 @@ if submit_button and prompt:
 
     # Clear the prompt after submission
     st.session_state['prompt'] = ""
-    st.experimental_rerun()  # Rerun the app to clear the input box properly
 
 # Display the trace data in the sidebar
 if st.session_state['trace_output']:
