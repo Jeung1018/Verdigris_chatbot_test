@@ -45,6 +45,9 @@ if 'prompt' not in st.session_state:
 with open("example_prompts.json", "r") as file:
     example_prompts = json.load(file)
 
+# Add vertical space using margin-top with st.markdown
+st.markdown("<div style='margin-top: 20px'></div>", unsafe_allow_html=True)
+
 # Add a select box for knowledge base prompts with an on_change callback
 selected_prompt = st.selectbox(
     "Frequently asked questions",
@@ -54,7 +57,7 @@ selected_prompt = st.selectbox(
 )
 
 # Add vertical space using margin-top with st.markdown
-st.markdown("<div style='margin-top: 40px'></div>", unsafe_allow_html=True)
+st.markdown("<div style='margin-top: 20px'></div>", unsafe_allow_html=True)
 
 # Display a text box for input
 st.write("## Type your Question")
