@@ -34,7 +34,6 @@ def extract_metadata(split_response):
 
     # Regular expression patterns to match title, category, and URL within each metadata block
     title_pattern = r'"title":"([^"]+)"'
-    category_pattern = r'"category":"([^"]+)"'
     url_pattern = r'"url":"(https://[^"]+)"'
 
     # Set to track unique metadata entries
