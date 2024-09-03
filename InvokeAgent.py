@@ -10,10 +10,10 @@ from requests import request
 from boto3.session import Session
 from botocore.auth import SigV4Auth
 from botocore.awsrequest import AWSRequest
+from dotenv import load_dotenv
 
 """
 # using dotenv for internal test
-from dotenv import load_dotenv
 
 # Load environment variables from .env file
 #load_dotenv()
@@ -23,6 +23,8 @@ agentId = ""
 agentAliasId = ""
 aws_region = ""
 """
+
+load_dotenv(dotenv_path='/home/ec2-user/chatbot-test/chatbot-test.env')
 
 # these variables should be stored in environment variables.
 agentId = os.getenv("AGENT_ID")
