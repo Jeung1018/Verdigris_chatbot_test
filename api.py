@@ -10,11 +10,25 @@ class ChatRequest(BaseModel):
     prompt: str
     session_id: str = None
 
+# Set up logging
+logging.basicConfig(level=logging.INFO)
 @app.get("/debug-env")
 async def debug_env():
-    region = os.getenv("AWS_REGION")
-    agent_id = os.getenv("AGENT_ID")
-    return {"AWS_REGION": region, "AGENT_ID": agent_id}
+    try:
+        region = os.getenv("AWS_REGION")
+        agent_id = os.getenv("AGENT_ID")
+
+        # Log the retrieved values
+        logging.info(f"Retrieved AWS_REGION: {region}")
+        logging.info(f"Retrieved AGENT_ID: {agent_id}")
+
+        if not region or not agent_id:
+            raise HTTPException(status_code=500, detail="Environment variables not loaded properly")
+
+        return {"AWS_REGION": region, "AGENT_ID": agent_id}
+    except Exception as e:
+        logging.error(f"Error in /debug-env: {e}")
+        raise HTTPException(status_code=500, detail="An error occurred while retrieving environment variables")
 
 @app.post("/chat")
 async def chat(request: ChatRequest):
