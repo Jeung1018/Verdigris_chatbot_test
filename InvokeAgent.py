@@ -6,18 +6,25 @@ import base64
 import io
 import sys
 import re
-import streamlit as st
 from requests import request
 from boto3.session import Session
 from botocore.auth import SigV4Auth
 from botocore.awsrequest import AWSRequest
-# from dotenv import load_dotenv
+
+"""
+# using dotenv for internal test
+from dotenv import load_dotenv
 
 # Load environment variables from .env file
-# load_dotenv()
+#load_dotenv()
 
-# Ensure these environment variables are set in your .env file
+# Internal test credentials
+agentId = ""
+agentAliasId = ""
+aws_region = ""
+"""
 
+# these variables should be stored in environment variables.
 agentId = os.getenv("AGENT_ID")
 agentAliasId = os.getenv("AGENT_ALIAS_ID")
 aws_region = os.getenv("AWS_REGION")
