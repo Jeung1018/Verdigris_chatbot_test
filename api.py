@@ -10,6 +10,12 @@ class ChatRequest(BaseModel):
     prompt: str
     session_id: str = None
 
+@app.get("/debug-env")
+async def debug_env():
+    region = os.getenv("AWS_REGION")
+    agent_id = os.getenv("AGENT_ID")
+    return {"AWS_REGION": region, "AGENT_ID": agent_id}
+
 @app.post("/chat")
 async def chat(request: ChatRequest):
     session_id = request.session_id or str(uuid.uuid4())
