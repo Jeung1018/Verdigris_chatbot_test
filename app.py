@@ -136,7 +136,7 @@ st.write("## Conversation History")
 
 # Load images outside the loop to optimize performance
 human_image = Image.open('human_face.png')
-robot_image = Image.open('verdigrisChar.jpg')
+robot_image = Image.open('static/verdigrisChar.jpg')
 circular_human_image = crop_to_circle(human_image)
 circular_robot_image = crop_to_circle(robot_image)
 

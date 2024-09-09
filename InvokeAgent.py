@@ -13,17 +13,15 @@ from botocore.awsrequest import AWSRequest
 from dotenv import load_dotenv
 
 """
-# using dotenv for internal test
+# Load environment variables from .env file for local test
+load_dotenv()
 
-# Load environment variables from .env file
-#load_dotenv()
-
-# Internal test credentials
-agentId = ""
-agentAliasId = ""
-aws_region = ""
+aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
+aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY")
+aws_session_token = os.getenv("AWS_SESSION_TOKEN")
 """
 
+# Load environment variables for EC2
 load_dotenv(dotenv_path='/home/ec2-user/chatbot-test/chatbot-test.env')
 
 # these variables should be stored in environment variables.
