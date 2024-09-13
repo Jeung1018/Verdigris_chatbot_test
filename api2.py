@@ -82,7 +82,7 @@ async def get_widget_js():
             bottom: 80px;
             right: 20px;
             width: 450px;
-            height: 600px;
+            height: 60vh;
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -97,7 +97,7 @@ async def get_widget_js():
         /* Large chatbox */
         .large {
             width: 600px;
-            height: 800px;
+            height: 80vh;
         }
 
         /* Chatbox header with logo and resize button */
@@ -322,7 +322,7 @@ async def get_widget_js():
         // Handle resizing on first question submission
         function resizeChatContainer() {
           chatContainer.style.width = '600px';
-          chatContainer.style.height = '800px';
+          chatContainer.style.height = '80vh';
           resizeButton.textContent = "<>"; // Update button text when expanded
           isLarge = true;
         }
@@ -331,12 +331,12 @@ async def get_widget_js():
         resizeButton.addEventListener('click', function() {
           if (isLarge) {
             chatContainer.style.width = '450px';
-            chatContainer.style.height = '600px';
+            chatContainer.style.height = '60vh';
             resizeButton.textContent = "<>"; // Update button text when collapsed
             isLarge = false;
           } else {
             chatContainer.style.width = '600px';
-            chatContainer.style.height = '800px';
+            chatContainer.style.height = '80vh';
             resizeButton.textContent = "><"; // Update button text when expanded
             isLarge = true;
           }
