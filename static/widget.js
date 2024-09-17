@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
             resizeChatContainer();
         }
     });
-});
 
     // **Send Button Click Event Handler**
     document.getElementById('sendChat').addEventListener('click', async function() {
