@@ -44,15 +44,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle resizing on first question submission
     function resizeChatContainer() {
-      chatContainer.style.width = '600px';
-      chatContainer.style.height = '80vh';
-      resizeButton.textContent = "<>"; // Update button text when expanded
-      isLarge = true;
+        chatContainer.style.width = '600px';
+        chatContainer.style.height = '80vh';
+        resizeButton.textContent = "<>"; // Update button text when expanded
+        isLarge = true;
     }
 
     // Toggle container size on resize button click
     resizeButton.addEventListener('click', function() {
-      if (isLarge) {
-        chatContainer.style.width = '450px';
-        chatContainer.style.height = '60vh';
-
+        if (isLarge) {
+            chatContainer.style.width = '450px';
+            chatContainer.style.height = '60vh';
+            resizeButton.textContent = "><";  // Update button text when collapsed
+            isLarge = false;
+        } else {
+            resizeChatContainer();
+        }
+    });
+});
