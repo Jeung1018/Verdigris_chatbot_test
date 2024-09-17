@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import HTMLResponse
+from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel
 from fastapi.staticfiles import StaticFiles
 import uuid
@@ -443,4 +443,4 @@ async def get_widget_js():
       });
     </script>
     """
-    return HTMLResponse(content=script_content)
+    return PlainTextResponse(content=script_content, media_type="application/javascript")
