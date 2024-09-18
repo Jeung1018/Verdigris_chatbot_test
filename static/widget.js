@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <span>Ask anything to Verdigris AI</span>
                 <span style="font-size: 12px;">powered by Claude3</span>
             </div>
-            <button id="resizeButton">Resize</button>
+            <button id="resizeButton"><></button> <!-- Use <> for resizing -->
         </div>
         <div id="chatMessages"></div>
         <div id="chatInputContainer">
@@ -42,24 +42,24 @@ document.addEventListener('DOMContentLoaded', function() {
         return 'sess-' + Math.random().toString(36).substr(2, 9);
     }
 
-    // Handle resizing
+    // Handle resizing on resize button click
     resizeButton.addEventListener('click', function() {
         if (isLarge) {
             chatContainer.style.width = '450px';
             chatContainer.style.height = '60vh';
-            resizeButton.textContent = "Expand";
+            resizeButton.textContent = "<>"; // Update button text to <>
             isLarge = false;
         } else {
             chatContainer.style.width = '600px';
             chatContainer.style.height = '80vh';
-            resizeButton.textContent = "Shrink";
+            resizeButton.textContent = "><"; // Update button text to ><
             isLarge = true;
         }
     });
 
     // Toggle chat box visibility
     chatButton.addEventListener('click', function() {
-        if (chatBox.style.display === 'none') {
+        if (chatBox.style.display === 'none' || chatBox.style.display === '') {
             chatBox.style.display = 'flex';
         } else {
             chatBox.style.display = 'none';
@@ -104,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 messagesDiv.appendChild(botMessageBubble);
                 messagesDiv.scrollTop = messagesDiv.scrollHeight;
 
-                // Add metadata if available
                 if (data.metadata && data.metadata.length > 0) {
                     let referencesContainer = document.createElement('div');
                     referencesContainer.classList.add('references-container');

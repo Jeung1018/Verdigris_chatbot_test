@@ -130,7 +130,7 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     }
 }
 
-/* Bubble styling for user and bot messages */
+/* Message styling */
 .message-container {
     display: flex;
     flex-direction: column;
@@ -142,11 +142,9 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     background-color: rgba(102, 224, 224, 0.1);
     border-radius: 15px;
     padding: 10px;
-    padding-left: 20px;
     color: #004A3E;
     max-width: 70%;
     align-self: flex-end;
-    margin-left: auto;
     margin-top: 20px;
 }
 
@@ -157,46 +155,4 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     color: #004A3E;
     max-width: 80%;
     align-self: flex-start;
-}
-
-/* Style for the foldable references section */
-.references-container {
-    margin-top: 10px;
-    width: 100%;
-}
-
-details {
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    padding: 15px;
-    border-radius: 5px;
-    background-color: white;
-}
-
-summary {
-    font-weight: bold;
-    cursor: pointer;
-}
-
-summary:hover {
-    color: #0069ff;
-}
-
-/* Reference bubble button styling */
-.reference-button {
-    display: inline-block;
-    padding: 10px 15px;
-    margin: 5px;
-    background-color: #66E0E0;
-    color: white;
-    border-radius: 20px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.reference-button:hover {
-    background-color: #0056d6;
-    text-decoration: none;
 }
