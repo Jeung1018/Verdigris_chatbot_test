@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Reference to the iframe in the parent page
+    var parentIframe = window.parent.document.getElementById('chatWidgetFrame');
+    var isExpanded = false;
+
     // Create and inject the chat button
     var chatButton = document.createElement('button');
     chatButton.id = 'chatButton';
@@ -25,21 +29,38 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.body.appendChild(chatBox);
 
-    // Initially make the chat box visible
-    chatBox.style.display = 'flex';
+    // Initially hide the chat box and set minimized iframe style
+    chatBox.style.display = 'none';
+    parentIframe.style.width = '60px';
+    parentIframe.style.height = '60px';
+    parentIframe.style.pointerEvents = 'none'; // Prevent iframe from blocking other elements
+    parentIframe.style.zIndex = '1';  // Set a low z-index when minimized
 
-    // **Visibility Toggle Event Handler**
+    // Toggle chat box visibility and iframe size
     chatButton.addEventListener('click', function() {
-        if (chatBox.style.display === 'flex') {
-            chatBox.style.display = 'none';  // Hide the chat box when clicked
+        if (isExpanded) {
+            // Minimize the iframe size and disable interaction
+            parentIframe.style.width = '60px';
+            parentIframe.style.height = '60px';
+            parentIframe.style.pointerEvents = 'none';  // Disable interaction to prevent blocking
+            parentIframe.style.zIndex = '1';  // Lower z-index when minimized
+            chatBox.style.display = 'none';  // Hide the chat box when iframe is minimized
         } else {
-            chatBox.style.display = 'flex';  // Show the chat box when clicked again
+            // Expand the iframe size and enable interaction
+            parentIframe.style.width = '450px';
+            parentIframe.style.height = '600px';
+            parentIframe.style.pointerEvents = 'auto';  // Enable interaction
+            parentIframe.style.zIndex = '1000';  // Set high z-index when expanded
+            chatBox.style.display = 'flex';  // Show the chat box when iframe is expanded
         }
+        isExpanded = !isExpanded;
     });
 
-    var session_id = sessionStorage.getItem('session_id');  // Retrieve session_id from sessionStorage
+    // Ensure iframe allows pointer-events on the button when minimized
+    parentIframe.style.pointerEvents = 'none';  // Initially set to none when minimized
 
-    // If no session_id exists, generate a new one
+    // Session ID management
+    var session_id = sessionStorage.getItem('session_id');  // Retrieve session_id from sessionStorage
     if (!session_id) {
         session_id = generateSessionId();  // Function to generate a unique session_id
         sessionStorage.setItem('session_id', session_id);  // Store it in sessionStorage
@@ -74,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // **Send Button Click Event Handler**
+    // Send button click event handler
     document.getElementById('sendChat').addEventListener('click', async function() {
         var prompt = document.getElementById('chatPrompt').value;
         var messagesDiv = document.getElementById('chatMessages');
