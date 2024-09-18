@@ -4,16 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Widget</title>
-    <link rel="stylesheet" href="/static/widget.css">  <!-- Include CSS if you have styling for the widget -->
+    <link rel="stylesheet" href="/static/widget.css"> <!-- Include your widget styles -->
 </head>
 <body>
-    <!-- Add iframe directly into the body for interaction -->
-    <iframe id="chatWidgetFrame"
-            src="about:blank"
-            style="border:none; width:60px; height:60px; position:fixed; bottom:20px; right:20px; z-index:1; pointer-events:none;">
-    </iframe>
+    <div id="chatBox">
+        <div id="chatHeader">
+            <img id="chatLogo" src="https://chatbot.verdigris.co/static/verdigris_logo.png" alt="Company Logo" />
+            <span>Ask anything to Verdigris AI</span>
+        </div>
+        <div id="chatMessages"></div>
+        <div id="chatInputContainer">
+            <input id="chatPrompt" type="text" placeholder="Enter your message" />
+            <button id="sendChat">Send</button>
+        </div>
+    </div>
 
-    <!-- Make sure widget.js is included to control behavior -->
-    <script src="/static/widget.js"></script>
+    <script>
+        var isExpanded = false;
+
+        // Add click event to the chat button to send a message to the parent window
+        document.getElementById('chatHeader').addEventListener('click', function () {
+            if (isExpanded) {
+                window.parent.postMessage('collapseIframe', '*');  // Send message to collapse iframe
+            } else {
+                window.parent.postMessage('expandIframe', '*');  // Send message to expand iframe
+            }
+            isExpanded = !isExpanded;
+        });
+    </script>
 </body>
 </html>
