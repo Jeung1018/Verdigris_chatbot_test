@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Reference to the iframe in the parent page
-    var parentIframe = window.parent.document.getElementById('chatWidgetFrame');
+    var parentIframe = document.getElementById('chatWidgetFrame');  // Adjusting to target iframe on same document
     var isExpanded = false;
 
     // Create and inject the chat button
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     chatBox.style.display = 'none';
     parentIframe.style.width = '60px';
     parentIframe.style.height = '60px';
-    parentIframe.style.pointerEvents = 'none'; // Prevent iframe from blocking other elements
+    parentIframe.style.pointerEvents = 'none';  // Prevent iframe from blocking other elements
     parentIframe.style.zIndex = '1';  // Set a low z-index when minimized
 
     // Toggle chat box visibility and iframe size
