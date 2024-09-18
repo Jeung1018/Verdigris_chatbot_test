@@ -1,15 +1,36 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Reference to the iframe in the parent page
-    var parentIframe = document.getElementById('chatWidgetFrame');  // Adjusting to target iframe on same document
+    // Reference to the iframe element (make sure the iframe ID is correct)
+    var parentIframe = window.frameElement || document.getElementById('chatWidgetFrame');
     var isExpanded = false;
 
-    // Create and inject the chat button
+    // Ensure iframe is minimized initially
+    if (parentIframe) {
+        parentIframe.style.width = '60px';
+        parentIframe.style.height = '60px';
+        parentIframe.style.position = 'fixed';  // Position fixed so it floats on the page
+        parentIframe.style.bottom = '20px';     // Place it in the bottom-right corner
+        parentIframe.style.right = '20px';
+        parentIframe.style.pointerEvents = 'none';  // Initially disable interaction
+        parentIframe.style.zIndex = '1';  // Ensure it is at a low z-index when minimized
+    }
+
+    // Create and inject the chat button (small widget icon)
     var chatButton = document.createElement('button');
     chatButton.id = 'chatButton';
-    chatButton.innerHTML = '&#128172;';
-    document.body.appendChild(chatButton);
+    chatButton.innerHTML = '&#128172;';  // Emoji icon for the button
+    chatButton.style.position = 'fixed';
+    chatButton.style.bottom = '20px';
+    chatButton.style.right = '20px';
+    chatButton.style.width = '60px';
+    chatButton.style.height = '60px';
+    chatButton.style.borderRadius = '50%';  // Circular button
+    chatButton.style.backgroundColor = '#66E0E0';  // Match your color theme
+    chatButton.style.color = 'white';
+    chatButton.style.border = 'none';
+    chatButton.style.zIndex = '1000';  // High z-index to keep the button clickable
+    document.body.appendChild(chatButton);  // Append the button to the body
 
-    // Create and inject the chat box
+    // Create and inject the chat box (hidden initially)
     var chatBox = document.createElement('div');
     chatBox.id = 'chatBox';
     chatBox.innerHTML = `
@@ -31,29 +52,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initially hide the chat box and set minimized iframe style
     chatBox.style.display = 'none';
-    parentIframe.style.width = '60px';
-    parentIframe.style.height = '60px';
-    parentIframe.style.pointerEvents = 'none';  // Prevent iframe from blocking other elements
-    parentIframe.style.zIndex = '1';  // Set a low z-index when minimized
 
-    // Toggle chat box visibility and iframe size
+    // Add click event listener to the chat button to toggle the widget state
     chatButton.addEventListener('click', function() {
         if (isExpanded) {
-            // Minimize the iframe size and disable interaction
+            // Minimize the iframe and hide the chat box
             parentIframe.style.width = '60px';
             parentIframe.style.height = '60px';
-            parentIframe.style.pointerEvents = 'none';  // Disable interaction to prevent blocking
+            parentIframe.style.pointerEvents = 'none';  // Disable interaction
             parentIframe.style.zIndex = '1';  // Lower z-index when minimized
-            chatBox.style.display = 'none';  // Hide the chat box when iframe is minimized
+            chatBox.style.display = 'none';  // Hide the chat box when minimized
         } else {
-            // Expand the iframe size and enable interaction
+            // Expand the iframe and show the chat box
             parentIframe.style.width = '450px';
             parentIframe.style.height = '600px';
             parentIframe.style.pointerEvents = 'auto';  // Enable interaction
-            parentIframe.style.zIndex = '1000';  // Set high z-index when expanded
-            chatBox.style.display = 'flex';  // Show the chat box when iframe is expanded
+            parentIframe.style.zIndex = '1000';  // Higher z-index when expanded
+            chatBox.style.display = 'flex';  // Show the chat box when expanded
         }
-        isExpanded = !isExpanded;
+        isExpanded = !isExpanded;  // Toggle the expanded state
     });
 
     // Ensure iframe allows pointer-events on the button when minimized
