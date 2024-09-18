@@ -5,54 +5,22 @@ document.addEventListener('DOMContentLoaded', function() {
     chatButton.innerHTML = '&#128172;';
     document.body.appendChild(chatButton);
 
-    // Create and inject the chat box
-    var chatBox = document.createElement('div');
-    chatBox.id = 'chatBox';
-    chatBox.innerHTML = `
-        <div id="chatHeader">
-            <img id="chatLogo" src="https://chatbot.verdigris.co/static/verdigris_logo.png" alt="Company Logo"/>
-            <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                <span>Ask anything to Verdigris AI</span>
-                <span style="font-size: 12px;">powered by Claude3</span>
-            </div>
-            <button id="resizeButton"><></button> <!-- Use <> for resizing -->
-        </div>
-        <div id="chatMessages"></div>
-        <div id="chatInputContainer">
-            <input id="chatPrompt" type="text" placeholder="Enter your message" />
-            <button id="sendChat">Send</button>
-        </div>
-    `;
-    document.body.appendChild(chatBox);
-
-    var session_id = sessionStorage.getItem('session_id');
-
-    // If no session_id exists, generate a new one
-    if (!session_id) {
-        session_id = generateSessionId();
-        sessionStorage.setItem('session_id', session_id);
-    }
-
-    var chatContainer = document.getElementById('chatBox');
+    // Retrieve the chat box and resize button
+    var chatBox = document.getElementById('chatBox');
     var resizeButton = document.getElementById('resizeButton');
     var isLarge = false;
-
-    // Function to generate a unique session ID
-    function generateSessionId() {
-        return 'sess-' + Math.random().toString(36).substr(2, 9);
-    }
 
     // Handle resizing on resize button click
     resizeButton.addEventListener('click', function() {
         if (isLarge) {
-            chatContainer.style.width = '450px';
-            chatContainer.style.height = '60vh';
-            resizeButton.textContent = "<>"; // Update button text to <>
+            chatBox.style.width = '450px';
+            chatBox.style.height = '60vh';
+            resizeButton.textContent = "<>"; // Update button text
             isLarge = false;
         } else {
-            chatContainer.style.width = '600px';
-            chatContainer.style.height = '80vh';
-            resizeButton.textContent = "><"; // Update button text to ><
+            chatBox.style.width = '600px';
+            chatBox.style.height = '80vh';
+            resizeButton.textContent = "><"; // Update button text
             isLarge = true;
         }
     });
@@ -92,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ prompt: prompt, session_id: session_id })
+                    body: JSON.stringify({ prompt: prompt, session_id: sessionStorage.getItem('session_id') })
                 });
                 let data = await res.json();
 
@@ -103,23 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 botMessageBubble.innerHTML = `<p>${data.response}</p>`;
                 messagesDiv.appendChild(botMessageBubble);
                 messagesDiv.scrollTop = messagesDiv.scrollHeight;
-
-                if (data.metadata && data.metadata.length > 0) {
-                    let referencesContainer = document.createElement('div');
-                    referencesContainer.classList.add('references-container');
-                    let foldableReferences = `
-                        <details>
-                            <summary>References</summary>
-                            <div style="display: flex; flex-wrap: wrap;">`;
-
-                    data.metadata.forEach(function(item) {
-                        foldableReferences += '<a href="' + item.url + '" class="reference-button" target="_blank">' + item.title + '</a>';
-                    });
-
-                    foldableReferences += '</details>';
-                    referencesContainer.innerHTML = foldableReferences;
-                    botMessageBubble.appendChild(referencesContainer);
-                }
             } catch (error) {
                 thinkingMessageBubble.remove();
                 var errorMessageBubble = document.createElement('div');
