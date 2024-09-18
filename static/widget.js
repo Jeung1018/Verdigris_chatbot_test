@@ -25,6 +25,18 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.body.appendChild(chatBox);
 
+    // Initially make the chat box visible
+    chatBox.style.display = 'flex';
+
+    // **Visibility Toggle Event Handler**
+    chatButton.addEventListener('click', function() {
+        if (chatBox.style.display === 'flex') {
+            chatBox.style.display = 'none';  // Hide the chat box when clicked
+        } else {
+            chatBox.style.display = 'flex';  // Show the chat box when clicked again
+        }
+    });
+
     var session_id = sessionStorage.getItem('session_id');  // Retrieve session_id from sessionStorage
 
     // If no session_id exists, generate a new one
