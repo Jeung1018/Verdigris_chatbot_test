@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Chat Widget</title>
     <link rel="stylesheet" href="/static/widget.css">  <!-- Include CSS if you have styling for the widget -->
 </head>
 <body>
-    <script src="/static/widget.js"></script>  <!-- Include the widget.js script -->
+    <!-- Add iframe directly into the body for interaction -->
+    <iframe id="chatWidgetFrame"
+            src="about:blank"
+            style="border:none; width:60px; height:60px; position:fixed; bottom:20px; right:20px; z-index:1; pointer-events:none;">
+    </iframe>
+
+    <!-- Make sure widget.js is included to control behavior -->
+    <script src="/static/widget.js"></script>
 </body>
 </html>
