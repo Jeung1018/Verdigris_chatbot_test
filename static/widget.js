@@ -3,16 +3,20 @@ document.addEventListener('DOMContentLoaded', function() {
     var parentIframe = window.frameElement || document.getElementById('chatWidgetFrame');
     var isExpanded = false;
 
-    // Ensure iframe is minimized initially
-    if (parentIframe) {
-        parentIframe.style.width = '60px';
-        parentIframe.style.height = '60px';
-        parentIframe.style.position = 'fixed';  // Position fixed so it floats on the page
-        parentIframe.style.bottom = '20px';     // Place it in the bottom-right corner
-        parentIframe.style.right = '20px';
-        parentIframe.style.pointerEvents = 'none';  // Initially disable interaction
-        parentIframe.style.zIndex = '1';  // Ensure it is at a low z-index when minimized
+    // Ensure iframe exists before applying any logic
+    if (!parentIframe) {
+        console.error("Iframe element 'chatWidgetFrame' not found.");
+        return; // Exit if iframe is not found
     }
+
+    // Ensure iframe is minimized initially
+    parentIframe.style.width = '60px';
+    parentIframe.style.height = '60px';
+    parentIframe.style.position = 'fixed';  // Position fixed so it floats on the page
+    parentIframe.style.bottom = '20px';     // Place it in the bottom-right corner
+    parentIframe.style.right = '20px';
+    parentIframe.style.pointerEvents = 'none';  // Initially disable interaction
+    parentIframe.style.zIndex = '1';  // Ensure it is at a low z-index when minimized
 
     // Create and inject the chat button (small widget icon)
     var chatButton = document.createElement('button');
