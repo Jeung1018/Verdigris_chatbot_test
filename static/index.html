@@ -11,6 +11,8 @@
         <div id="chatHeader">
             <img id="chatLogo" src="https://chatbot.verdigris.co/static/verdigris_logo.png" alt="Company Logo" />
             <span>Ask anything to Verdigris AI</span>
+            <!-- Add a close button -->
+            <button id="toggleButton">&#128172;</button> <!-- Emoji for chat -->
         </div>
         <div id="chatMessages"></div>
         <div id="chatInputContainer">
@@ -22,14 +24,27 @@
     <script>
         var isExpanded = false;
 
-        // Add click event to the chat button to send a message to the parent window
-        document.getElementById('chatHeader').addEventListener('click', function () {
+        // Add click event to the toggle button to send a message to the parent window
+        document.getElementById('toggleButton').addEventListener('click', function () {
             if (isExpanded) {
                 window.parent.postMessage('collapseIframe', '*');  // Send message to collapse iframe
             } else {
                 window.parent.postMessage('expandIframe', '*');  // Send message to expand iframe
             }
             isExpanded = !isExpanded;
+        });
+
+        // Simulate message sending to chat
+        document.getElementById('sendChat').addEventListener('click', function () {
+            var message = document.getElementById('chatPrompt').value;
+            var messagesDiv = document.getElementById('chatMessages');
+            if (message) {
+                var userMessage = document.createElement('div');
+                userMessage.classList.add('message-container', 'user-message');
+                userMessage.textContent = "You: " + message;
+                messagesDiv.appendChild(userMessage);
+                document.getElementById('chatPrompt').value = ''; // Clear input
+            }
         });
     </script>
 </body>
