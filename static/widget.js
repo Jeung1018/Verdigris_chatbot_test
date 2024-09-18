@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     chatBox.id = 'chatBox';
     chatBox.innerHTML = `
         <div id="chatHeader">
-            <img id="chatLogo" src="/static/verdigris_logo.png" alt="Company Logo"/>
+            <img id="chatLogo" src="https://chatbot.verdigris.co/static/verdigris_logo.png" alt="Company Logo"/>
             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                 <span>Ask anything to Verdigris AI</span>
                 <span style="font-size: 12px;">powered by Claude3</span>
