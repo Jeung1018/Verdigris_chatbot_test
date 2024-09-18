@@ -37,7 +37,7 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: width 0.5s ease, height 0.5s ease;
+    transition: width 0.5s ease, height 0.5s ease, z-index 0.3s ease, pointer-events 0.3s ease;
 }
 
 /* Large chatbox */
