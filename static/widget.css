@@ -83,6 +83,11 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     transition: background-color 0.3s ease; /* Smooth transition */
 }
 
+/* Hover effect for the resize button */
+#resizeButton:hover {
+    background-color: #0056d6; /* Same hover color as send button */
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     #chatLogo {
