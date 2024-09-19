@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var chatBox = document.getElementById('chatBox');
     var resizeButton = document.getElementById('resizeButton');
     var sendButton = document.getElementById('sendChat');
+    var chatInput = document.getElementById('chatPrompt');
     var isLarge = false;
 
     // Send a message to the parent window on resize button click
@@ -21,6 +22,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Disable send button if input is empty
     document.getElementById('chatPrompt').addEventListener('input', function() {
         sendButton.disabled = !this.value.trim();
+    });
+
+    // Detect 'Enter' key press in the input field
+    chatInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' && !event.shiftKey) {  // Enter without Shift
+            event.preventDefault();  // Prevent adding a new line
+            sendButton.click();  // Trigger send button click
+        }
     });
 
     // Send chat message to backend
