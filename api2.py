@@ -27,7 +27,7 @@ class ChatRequest(BaseModel):
 
 
 # Set rate-limiting configurations
-RATE_LIMIT = 30  # max requests per minute
+RATE_LIMIT = 1  # max requests per minute
 RATE_LIMIT_TTL = 60  # time window in seconds (1 minute)
 
 
