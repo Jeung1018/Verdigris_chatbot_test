@@ -80,6 +80,7 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     cursor: pointer;
     font-size: 12px;
     margin-top: 20px;
+    transition: background-color 0.3s ease; /* Smooth transition */
 }
 
 /* Responsive design */
