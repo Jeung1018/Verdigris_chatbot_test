@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://chatbot.verdigris.co/static/widget.css"> <!-- Link to CSS file -->
 </head>
 <body>
-    <div id="chatBox">
+    <div id="chatBox" style="display: none;"> <!-- Hidden by default -->
         <div id="chatHeader">
             <img id="chatLogo" src="https://chatbot.verdigris.co/static/verdigris_logo.png" alt="Company Logo" />
             <span>Ask anything to Verdigris AI</span>
@@ -20,26 +20,7 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var resizeButton = document.getElementById('resizeButton');
-            var isLarge = false;
-
-            // Add event listener for resizing the chatbox
-            resizeButton.addEventListener('click', function() {
-                if (isLarge) {
-                    // Send a message to collapse the iframe
-                    window.parent.postMessage('collapseIframe', '*');
-                    resizeButton.textContent = '<>'; // Change button text for collapsed state
-                    isLarge = false;
-                } else {
-                    // Send a message to expand the iframe
-                    window.parent.postMessage('expandIframe', '*');
-                    resizeButton.textContent = '><'; // Change button text for expanded state
-                    isLarge = true;
-                }
-            });
-        });
-    </script>
+    <!-- Link the external JavaScript file -->
+    <script src="https://chatbot.verdigris.co/static/widget.js"></script> <!-- Assuming this is your file location -->
 </body>
 </html>
