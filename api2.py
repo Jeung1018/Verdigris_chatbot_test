@@ -53,7 +53,7 @@ async def chat(request: Request, chat_request: ChatRequest):
             "metadata": metadata_list  # Include metadata in the response
         }
         # Log the outgoing response
-        logging.info(f"Response sent: session_id={session_id}, response={llm_response}")
+        logging.info(f"Response sent: session_id={session_id}, response={llm_response}, metadata={metadata_list}")
         return JSONResponse(content=response)
     else:
         logging.error(f"LLM response is empty for session_id={session_id}")
