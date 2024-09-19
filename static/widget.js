@@ -1,19 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Create and inject the chat button
-    var chatButton = document.createElement('button');
-    chatButton.id = 'chatButton';
-    chatButton.innerHTML = '&#128172;';  // Chat icon
-    document.body.appendChild(chatButton);
 
     // Retrieve the chat box and resize button
     var chatBox = document.getElementById('chatBox');
     var resizeButton = document.getElementById('resizeButton');
     var isLarge = false;
-
-    // Add event listener for showing the chat box when clicked
-    chatButton.addEventListener('click', function() {
-        chatBox.style.display = (chatBox.style.display === 'none' || chatBox.style.display === '') ? 'flex' : 'none';
-    });
 
     // Handle resizing on resize button click
     resizeButton.addEventListener('click', function() {
