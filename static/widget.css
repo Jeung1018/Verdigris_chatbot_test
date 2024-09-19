@@ -27,7 +27,7 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     transition: width 0.5s ease, height 0.5s ease;
 }
 
-/* Chatbox header with logo and resize button */
+/* Chatbox header */
 #chatHeader {
     display: flex;
     align-items: center;
@@ -36,10 +36,26 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     color: #004A3E;
     font-size: 20px;
     font-weight: bold;
-    position: relative;
-    margin-top: 20px;
-    margin-left: 30px;
+    padding: 20px;  /* Padding to give some space */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);  /* Add a shadow for separation */
 }
+
+/* Chat messages area (flex-grow allows this section to expand) */
+#chatMessages {
+    flex-grow: 1;  /* This will take up the remaining space */
+    overflow-y: auto;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* Chat input area */
+#chatInputContainer {
+    display: flex;
+    border-top: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
 
 /* Resize button */
 #resizeButton {
@@ -64,22 +80,6 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     left: -35px;
     height: auto;
     margin-top: 10px;
-}
-
-/* Chat messages container */
-#chatMessages {
-    flex-grow: 1;
-    padding: 10px;
-    overflow-y: auto;
-    font-size: 14px;
-}
-
-/* Chat input area */
-#chatInputContainer {
-    display: flex;
-    border-top: 1px solid #ccc;
-    padding: 10px;
-    background-color: #f9f9f9;
 }
 
 #chatPrompt {
