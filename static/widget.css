@@ -45,7 +45,7 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
 }
 
 /* Logo image styling */
