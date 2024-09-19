@@ -90,16 +90,6 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
 
 /* Responsive design */
 @media (max-width: 768px) {
-
-    #chatBox {
-        width: 90%; /* Set a percentage width to fit small screens */
-        height: 60vh; /* Minimum height */
-        min-width: 320px; /* Set a minimum width to avoid being too small */
-        min-height: 300px; /* Set a minimum height */
-        right: 5%; /* Center the widget horizontally */
-        bottom: 20px; /* Adjust bottom margin */
-    }
-
     #chatLogo {
         width: 60px;
         height: 60px;
@@ -117,15 +107,6 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
 }
 
 @media (max-width: 480px) {
-    #chatBox {
-        width: 90%; /* Set a percentage width to fit small screens */
-        height: 60vh; /* Minimum height */
-        min-width: 320px; /* Set a minimum width to avoid being too small */
-        min-height: 300px; /* Set a minimum height */
-        right: 5%; /* Center the widget horizontally */
-        bottom: 20px; /* Adjust bottom margin */
-    }
-
     #chatLogo {
         width: 60px;
         height: 60px;
