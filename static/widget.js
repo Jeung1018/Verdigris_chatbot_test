@@ -13,19 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var sendButton = document.getElementById('sendChat');
     var isLarge = false;
 
-    // Handle resizing on resize button click
+    // Send a message to the parent window on resize button click
     resizeButton.addEventListener('click', function() {
-        if (isLarge) {
-            chatBox.style.width = '450px';
-            chatBox.style.height = '60vh';
-            resizeButton.textContent = "<>"; // Update button text when minimized
-            isLarge = false;
-        } else {
-            chatBox.style.width = '600px';
-            chatBox.style.height = '80vh';
-            resizeButton.textContent = "><"; // Update button text when expanded
-            isLarge = true;
-        }
+        window.parent.postMessage('toggleResize', '*');
     });
 
     // Disable send button if input is empty
