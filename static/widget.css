@@ -31,13 +31,20 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
 #chatHeader {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;  /* Spread logo and title */
     background-color: white;
     color: #004A3E;
     font-size: 20px;
     font-weight: bold;
     padding: 20px;  /* Padding to give some space */
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);  /* Add a shadow for separation */
+}
+
+/* Logo image styling */
+#chatLogo {
+    max-width: 120px;
+    height: auto;
+    margin-top: 10px;
 }
 
 /* Chat messages area (flex-grow allows this section to expand) */
@@ -73,14 +80,6 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     margin-top: 20px;
 }
 
-/* Logo image styling */
-#chatLogo {
-    max-width: 120px;
-    position: absolute;
-    left: -35px;
-    height: auto;
-    margin-top: 10px;
-}
 
 #chatPrompt {
     flex-grow: 1;
