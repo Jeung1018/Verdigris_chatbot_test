@@ -58,7 +58,7 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     border-radius: 5px;
     margin-right: 20px; /* Add space between logo and title */
     position: absolute;
-    left: 20px;  /* Position it to the left */
+    left: 10px;  /* Position it to the left */
 }
 
 /* Title styling */
