@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+    // Check if session_id exists in sessionStorage, if not generate one
+    if (!sessionStorage.getItem('session_id')) {
+        sessionStorage.setItem('session_id', generateUUID());
+    }
+
     // Retrieve the chat box and resize button
     var chatBox = document.getElementById('chatBox');
     var resizeButton = document.getElementById('resizeButton');
@@ -77,3 +82,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Helper function to generate a unique session ID
+function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
