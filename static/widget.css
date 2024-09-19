@@ -43,20 +43,22 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
 
 /* Header container wrapping logo, title, and resize button */
 #headerContainer {
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Space between logo, title, and resize button */
     width: 100%;
-    max-width: 600px; /* Set a maximum width to prevent it from getting too large */
+    max-width: 600px;
 }
 
 /* Logo image styling */
 #chatLogo {
-    width: 100px;
-    height: 100px;
+    width: 70px;    /* Set a fixed width */
+    height: 70px;   /* Set a fixed height */
     object-fit: cover;
     border-radius: 5px;
-    margin-right: 10px;
+    margin-right: 20px; /* Add space between logo and title */
+    position: absolute;
+    left: 20px;  /* Position it to the left */
 }
 
 /* Title styling */
