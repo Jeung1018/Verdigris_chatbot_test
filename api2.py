@@ -71,7 +71,14 @@ async def chat(request: Request, chat_request: ChatRequest):
 
     # Check rate limit
     if not check_rate_limit(ip_address):
-        raise HTTPException(status_code=429, detail="Rate limit exceeded. Please try again later.")
+        # Custom error message response for rate limiting
+        error_response = {
+            "error": True,
+            "message": "You have exceeded the rate limit. Please wait and try again in a minute.",
+            "timestamp": time.time(),
+            "ip_address": ip_address
+        }
+        return JSONResponse(status_code=429, content=error_response)
 
     # Log the incoming request data in Redis
     timestamp = time.time()
