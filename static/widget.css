@@ -88,8 +88,8 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
 /* Responsive design */
 @media (max-width: 768px) {
     #chatLogo {
-        width: 60px;
-        height: 60px;
+        width: 80px;
+        height: 80px;
     }
 
     #headerContainer span {
@@ -104,8 +104,8 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
 
 @media (max-width: 480px) {
     #chatLogo {
-        width: 60px;
-        height: 60px;
+        width: 80px;
+        height: 80px;
     }
 
     #headerContainer span {
