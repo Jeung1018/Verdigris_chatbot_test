@@ -5,29 +5,26 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     font-family: 'Roboto', sans-serif;
 }
 
-/* Chatbox container */
-#chatBox {
-    display: none; /* Hidden by default */
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    width: 450px;
-    height: 60vh;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 10000;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: width 0.5s ease, height 0.5s ease;
-}
-
 /* Large chatbox */
 .large {
     width: 600px;
     height: 80vh;
+}
+
+/* Chatbox */
+#chatBox {
+    position: fixed; /* Make it fixed so it stays at the bottom-right */
+    bottom: 80px;    /* Same as parent iframe bottom margin */
+    right: 20px;     /* Same as parent iframe right margin */
+    width: 450px;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10000; /* Ensure it stays above other elements */
+    transition: width 0.5s ease, height 0.5s ease;
 }
 
 /* Chatbox header with logo and resize button */
