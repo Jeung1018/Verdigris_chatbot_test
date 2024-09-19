@@ -29,9 +29,10 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
 
 /* Chatbox header */
 #chatHeader {
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;  /* Spread logo and title */
+    justify-content: center;
     background-color: white;
     color: #004A3E;
     font-size: 20px;
@@ -42,11 +43,28 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
 
 /* Logo image styling */
 #chatLogo {
+    position: absolute;
+    left: 20px;
     width: 50px;    /* Set a fixed width */
     height: 50px;   /* Set a fixed height */
     object-fit: cover;  /* Crop the image to fit within the box */
     border-radius: 5px; /* Optional: add rounded corners to match the chatbox style */
-    margin-right: 10px;  /* Space between logo and title */
+}
+
+/* Resize button */
+#resizeButton {
+    background-color: rgba(102, 224, 224, 1);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    position: absolute;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 24px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 20px;
 }
 
 /* Chat messages area (flex-grow allows this section to expand) */
@@ -63,23 +81,6 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     border-top: 1px solid #ccc;
     padding: 10px;
     background-color: #f9f9f9;
-}
-
-
-/* Resize button */
-#resizeButton {
-    background-color: rgba(102, 224, 224, 1);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    position: absolute;
-    right: 10px;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 24px;
-    cursor: pointer;
-    font-size: 12px;
-    margin-top: 20px;
 }
 
 
