@@ -2,12 +2,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Check if session_id exists in sessionStorage, if not generate one
     if (!sessionStorage.getItem('session_id')) {
-        sessionStorage.setItem('session_id', generateUUID());
+        const sessionId = generateUUID();
+        sessionStorage.setItem('session_id', sessionId);
+        console.log("Generated session ID:", sessionId); // Debugging info
     }
 
     // Retrieve the chat box and resize button
     var chatBox = document.getElementById('chatBox');
     var resizeButton = document.getElementById('resizeButton');
+    var sendButton = document.getElementById('sendChat');
     var isLarge = false;
 
     // Handle resizing on resize button click
@@ -25,9 +28,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Disable send button if input is empty
+    document.getElementById('chatPrompt').addEventListener('input', function() {
+        sendButton.disabled = !this.value.trim();
+    });
+
     // Send chat message to backend
-    document.getElementById('sendChat').addEventListener('click', async function() {
-        var prompt = document.getElementById('chatPrompt').value;
+    sendButton.addEventListener('click', async function() {
+        var prompt = document.getElementById('chatPrompt').value.trim();
         var messagesDiv = document.getElementById('chatMessages');
 
         if (prompt) {
@@ -40,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Clear the input field
             document.getElementById('chatPrompt').value = '';
+            sendButton.disabled = true; // Disable until next input
 
             // Show thinking spinner
             var thinkingMessageBubble = document.createElement('div');
@@ -57,6 +66,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     },
                     body: JSON.stringify({ prompt: prompt, session_id: sessionStorage.getItem('session_id') })
                 });
+
+                if (!res.ok) {
+                    throw new Error(`Server error: ${res.statusText}`);
+                }
+
                 let data = await res.json();
 
                 // Remove the thinking spinner
@@ -78,6 +92,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 errorMessageBubble.innerHTML = '<p>Error occurred: ' + error.message + '</p>';
                 messagesDiv.appendChild(errorMessageBubble);
                 messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+                console.error("Error during fetch:", error); // Log for debugging
             }
         }
     });
