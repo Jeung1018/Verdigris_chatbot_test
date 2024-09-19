@@ -16,7 +16,7 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     position: fixed; /* Make it fixed so it stays at the bottom-right */
     bottom: 80px;    /* Same as parent iframe bottom margin */
     width: calc(100% - 40px);
-    margin: 0 20px;
+    margin: 0 10px;
     height: calc(100vh - 90px);
     display: flex;
     flex-direction: column;
