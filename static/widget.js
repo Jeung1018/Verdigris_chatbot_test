@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Send message to backend
             try {
-                let res = await fetch("/chat", {
+                let res = await fetch("https://chatbot.verdigris.co/chat", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
