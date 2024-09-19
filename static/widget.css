@@ -113,7 +113,7 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     }
 
     #headerContainer span {
-        font-size: 0.8em;
+        font-size: 0.6em;
     }
 
     #resizeButton {
