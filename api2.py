@@ -5,6 +5,7 @@ from fastapi.staticfiles import StaticFiles
 import uuid
 import redis
 import time
+import json  # Import json for serialization
 
 # Create FastAPI app
 app = FastAPI()
@@ -66,7 +67,7 @@ async def chat(request: Request, chat_request: ChatRequest):
         "ip_address": ip_address,
         "event": "request"
     }
-    redis_client.rpush("chat_logs", str(request_log))  # Push request log into Redis
+    redis_client.rpush("chat_logs", json.dumps(request_log))  # Push request log into Redis
 
     if not prompt:
         raise HTTPException(status_code=400, detail="Prompt is required")
@@ -91,7 +92,7 @@ async def chat(request: Request, chat_request: ChatRequest):
             "ip_address": ip_address,
             "event": "response"
         }
-        redis_client.rpush("chat_logs", str(response_log))  # Push response log into Redis
+        redis_client.rpush("chat_logs", json.dumps(response_log))  # Push response log into Redis
 
         return JSONResponse(content=response)
     else:
@@ -101,5 +102,5 @@ async def chat(request: Request, chat_request: ChatRequest):
 # Health check endpoint (optional)
 @app.get("/health")
 def health_check():
-    redis_client.rpush("chat_logs", str({"event": "health_check", "timestamp": time.time()}))
+    redis_client.rpush("chat_logs", json.dumps({"event": "health_check", "timestamp": time.time()}))
     return {"status": "ok"}
