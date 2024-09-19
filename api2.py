@@ -6,9 +6,9 @@ import InvokeAgent as agenthelper
 import uuid
 import redis
 import time
-import pytz
-import datetime
 import json  # Import json for serialization
+import datetime
+import pytz  # Import pytz for timezone handling
 
 # Create FastAPI app
 app = FastAPI()
@@ -27,7 +27,7 @@ class ChatRequest(BaseModel):
 
 
 # Set rate-limiting configurations
-RATE_LIMIT = 2  # max requests per minute
+RATE_LIMIT = 30  # max requests per minute
 RATE_LIMIT_TTL = 60  # time window in seconds (1 minute)
 
 
@@ -49,6 +49,7 @@ def check_rate_limit(ip: str) -> bool:
 
     return True
 
+
 # Helper function to convert Unix timestamp to readable time and LA time
 def convert_timestamp(timestamp):
     # Convert to UTC datetime
@@ -59,6 +60,7 @@ def convert_timestamp(timestamp):
     la_time = datetime.datetime.fromtimestamp(timestamp, la_timezone).strftime('%Y-%m-%d %H:%M:%S %Z')
 
     return readable_time, la_time
+
 
 # Main chat endpoint with rate limiting
 @app.post("/chat")
@@ -73,6 +75,8 @@ async def chat(request: Request, chat_request: ChatRequest):
 
     # Log the incoming request data in Redis
     timestamp = time.time()
+    readable_time, la_time = convert_timestamp(timestamp)
+
     request_log = {
         "session_id": session_id,
         "prompt": prompt,
@@ -119,5 +123,7 @@ async def chat(request: Request, chat_request: ChatRequest):
 # Health check endpoint (optional)
 @app.get("/health")
 def health_check():
-    redis_client.rpush("chat_logs", json.dumps({"event": "health_check", "timestamp": time.time()}))
+    readable_time, la_time = convert_timestamp(time.time())
+    redis_client.rpush("chat_logs", json.dumps(
+        {"event": "health_check", "timestamp": time.time(), "readable_time": readable_time, "la_time": la_time}))
     return {"status": "ok"}
