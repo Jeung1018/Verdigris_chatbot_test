@@ -17,7 +17,7 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     bottom: 80px;    /* Same as parent iframe bottom margin */
     right: 20px;     /* Same as parent iframe right margin */
     width: 100vh;
-    height: 100vh;
+    height: 100vh-40px;
     display: flex;
     flex-direction: column;
     background-color: white;
