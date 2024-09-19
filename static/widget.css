@@ -41,14 +41,30 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);  /* Add a shadow for separation */
 }
 
+/* Header container wrapping logo, title, and resize button */
+#headerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space between logo, title, and resize button */
+    width: 100%;
+    max-width: 600px; /* Set a maximum width to prevent it from getting too large */
+}
+
 /* Logo image styling */
 #chatLogo {
-    position: absolute;
-    left: 20px;
-    width: 50px;    /* Set a fixed width */
-    height: 50px;   /* Set a fixed height */
-    object-fit: cover;  /* Crop the image to fit within the box */
-    border-radius: 5px; /* Optional: add rounded corners to match the chatbox style */
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+/* Title styling */
+#headerContainer span {
+    flex-grow: 1; /* Take up remaining space between logo and button */
+    text-align: center; /* Center the title text */
+    font-size: 1.5em;
+    color: #004A3E;
 }
 
 /* Resize button */
@@ -65,6 +81,39 @@ body, #chatHeader, #chatMessages, #chatPrompt, #sendChat {
     cursor: pointer;
     font-size: 12px;
     margin-top: 20px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    #chatLogo {
+        width: 40px;
+        height: 40px;
+    }
+
+    #headerContainer span {
+        font-size: 1.2em;
+    }
+
+    #resizeButton {
+        width: 24px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #chatLogo {
+        width: 30px;
+        height: 30px;
+    }
+
+    #headerContainer span {
+        font-size: 1em;
+    }
+
+    #resizeButton {
+        width: 20px;
+        height: 18px;
+    }
 }
 
 /* Chat messages area (flex-grow allows this section to expand) */
