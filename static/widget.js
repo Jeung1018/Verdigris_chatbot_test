@@ -91,7 +91,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Display bot's response
                     var botMessageBubble = document.createElement('div');
                     botMessageBubble.classList.add('message-container', 'bot-message');
-                    botMessageBubble.innerHTML = `<p>${data.response}</p>`;
+
+                    // Apply the convertToLinks function to transform plain text links and emails
+                    botMessageBubble.innerHTML = convertToLinks(data.response);
                     messagesDiv.appendChild(botMessageBubble);
 
                     // Add references if available
@@ -143,4 +145,16 @@ function generateUUID() {
         var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
+}
+
+// Function to convert URLs and emails to clickable links
+function convertToLinks(text) {
+    const urlPattern = /(https?:\/\/[^\s]+)/g;
+    const emailPattern = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/g;
+
+    // Convert URLs to clickable links
+    const withLinks = text.replace(urlPattern, '<a href="$1" target="_blank">$1</a>');
+
+    // Convert email addresses to mailto: links
+    return withLinks.replace(emailPattern, '<a href="mailto:$1">$1</a>');
 }
