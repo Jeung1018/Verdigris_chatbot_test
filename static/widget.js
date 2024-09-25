@@ -149,7 +149,7 @@ function generateUUID() {
 
 // Function to convert URLs and emails to clickable links
 function convertToLinks(text) {
-    const urlPattern = /(https?:\/\/[^\s.,!?]+[^\s.,!?])/g;
+    const urlPattern = /(https?:\/\/[^\s.,!?]+(?:\.[^\s.,!?]+)+(?:\/[^\s]*)*)/g;
     const emailPattern = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/g;
 
     // Convert URLs to clickable links
